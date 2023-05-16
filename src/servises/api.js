@@ -6,6 +6,5 @@ export default async function Api(search, page) {
   let apiImg = `?q=${search}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`;
 
   const response = await axios(apiImg);
-  console.log('response: ', response);
   return await response.data.hits;
 }

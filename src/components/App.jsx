@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import { Component } from 'react';
 
 import Searchbar from './Searchbar/Searchbar';
@@ -20,7 +19,7 @@ export class App extends Component {
     this.setState({ page: Number([page]) + 1 });
   };
   onSubmit = async data => {
-    this.setState({ search: data });
+    this.setState({ images: [], search: data, page: 1 });
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -28,20 +27,25 @@ export class App extends Component {
       this.state.search !== prevState.search ||
       this.state.page !== prevState.page
     ) {
+      this.setState({ isLoading: true });
       const { search } = this.state.search;
       try {
         const api = await Api(search, this.state.page);
-        this.setState(prevState => ({
-          images: [...prevState.images, { images: api }],
-        }));
+        setTimeout(() => {
+          this.setState(prevState => ({
+            images: [...prevState.images, { images: api }],
+          }));
+        }, 1500);
       } catch (error) {
         console.log(error);
+      } finally {
+        setTimeout(() => {
+          this.setState({ isLoading: false });
+        }, 2000);
       }
     }
   }
-  componentWillUnmount() {
-    // this.setState({ images: [] });
-  }
+  componentWillUnmount() {}
   render() {
     return (
       <div>
@@ -52,9 +56,7 @@ export class App extends Component {
         <ImageGallery>
           <ImageGalleryItem cards={this.state.images} />
         </ImageGallery>
-        {this.state.isLoading && <div>Loading</div>}
-
-        <Loader />
+        <Loader loading={this.state.isLoading} />
         <Button props={this.state} incrementPage={this.incrementPage} />
         <Modal />
       </div>

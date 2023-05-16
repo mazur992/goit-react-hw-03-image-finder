@@ -4,7 +4,11 @@ export default class Searchbar extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     const form = event.currentTarget;
-    const search = await form.elements.search.value;
+    const search = await form.elements.search.value.trim();
+    if (search.length === 0) {
+      alert('you need to enter a keyword to search');
+      return;
+    }
     this.props.onSubmit({ search });
     form.reset();
   };
@@ -12,11 +16,7 @@ export default class Searchbar extends Component {
     return (
       <header className="searchbar">
         <form className="form" onSubmit={this.handleSubmit}>
-          <button
-            type="submit"
-            className="button"
-            // disabled={this.props.isSubmiting}
-          >
+          <button type="submit" className="button">
             <span className="button-label">Search</span>
           </button>
 
