@@ -13,6 +13,7 @@ export class App extends Component {
     search: '',
     page: 1,
     isLoading: false,
+    largeImg: '',
   };
   incrementPage = () => {
     const { page } = this.state;
@@ -20,6 +21,9 @@ export class App extends Component {
   };
   onSubmit = async data => {
     this.setState({ images: [], search: data, page: 1 });
+  };
+  addLargeImg = data => {
+    this.setState({ largeImg: data });
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -31,17 +35,13 @@ export class App extends Component {
       const { search } = this.state.search;
       try {
         const api = await Api(search, this.state.page);
-        setTimeout(() => {
-          this.setState(prevState => ({
-            images: [...prevState.images, { images: api }],
-          }));
-        }, 1500);
+        this.setState(prevState => ({
+          images: [...prevState.images, { images: api }],
+        }));
       } catch (error) {
         console.log(error);
       } finally {
-        setTimeout(() => {
-          this.setState({ isLoading: false });
-        }, 2000);
+        this.setState({ isLoading: false });
       }
     }
   }
@@ -54,11 +54,14 @@ export class App extends Component {
           isSubmiting={this.state.isLoading}
         />
         <ImageGallery>
-          <ImageGalleryItem cards={this.state.images} />
+          <ImageGalleryItem
+            cards={this.state.images}
+            addLargeI={this.addLargeImg}
+          />
         </ImageGallery>
         <Loader loading={this.state.isLoading} />
         <Button props={this.state} incrementPage={this.incrementPage} />
-        <Modal />
+        <Modal largeImg={this.state.largeImg} />
       </div>
     );
   }
