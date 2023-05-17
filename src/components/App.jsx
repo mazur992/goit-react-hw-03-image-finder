@@ -13,7 +13,9 @@ export class App extends Component {
     search: '',
     page: 1,
     isLoading: false,
-    largeImg: '',
+
+    largeImg: { img: '', alt: '' },
+    isShowModal: false,
   };
   incrementPage = () => {
     const { page } = this.state;
@@ -22,8 +24,14 @@ export class App extends Component {
   onSubmit = async data => {
     this.setState({ images: [], search: data, page: 1 });
   };
-  addLargeImg = data => {
-    this.setState({ largeImg: data });
+  addLargeImg = (img, tags) => {
+    this.setState({ largeImg: { img: img, tags: tags } });
+  };
+  showModal = () => {
+    this.setState({ isShowModal: true });
+  };
+  hideModal = () => {
+    this.setState({ isShowModal: false });
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -56,12 +64,15 @@ export class App extends Component {
         <ImageGallery>
           <ImageGalleryItem
             cards={this.state.images}
+            showModal={this.showModal}
             addLargeI={this.addLargeImg}
           />
         </ImageGallery>
         <Loader loading={this.state.isLoading} />
         <Button props={this.state} incrementPage={this.incrementPage} />
-        <Modal largeImg={this.state.largeImg} />
+        {this.state.isShowModal && (
+          <Modal largeImg={this.state.largeImg} hideModal={this.hideModal} />
+        )}
       </div>
     );
   }

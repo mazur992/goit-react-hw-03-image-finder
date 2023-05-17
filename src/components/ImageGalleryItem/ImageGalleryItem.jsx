@@ -2,7 +2,11 @@ import { Component } from 'react';
 
 export default class ImageGalleryItem extends Component {
   handleClick = event => {
-    this.props.addLargeI(event.currentTarget.dataset.large);
+    this.props.addLargeI(
+      event.currentTarget.dataset.large,
+      event.currentTarget.dataset.tags
+    );
+    this.props.showModal();
   };
   render() {
     const { cards } = this.props;
@@ -14,6 +18,7 @@ export default class ImageGalleryItem extends Component {
             key={img.id}
             className="gallery-item"
             data-large={img.largeImageURL}
+            data-tags={img.tags}
             onClick={this.handleClick}
           >
             <img
