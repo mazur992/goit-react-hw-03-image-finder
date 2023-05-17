@@ -5,7 +5,6 @@ export default function Loader(props) {
   const { loading } = props;
   return (
     loading && (
-      // <div className={css.loader}>
       <MutatingDots
         height="150"
         width="150"
@@ -17,7 +16,6 @@ export default function Loader(props) {
         wrapperClass={css.loader}
         visible={true}
       />
-      // </div>
     )
   );
 }

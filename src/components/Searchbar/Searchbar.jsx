@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Notiflix from 'notiflix';
 
 import css from './Searchbar.module.css';
 
@@ -8,7 +9,7 @@ export default class Searchbar extends Component {
     const form = event.currentTarget;
     const search = await form.elements.search.value.trim();
     if (search.length === 0) {
-      alert('you need to enter a keyword to search');
+      Notiflix.Notify.failure('you need to enter a keyword to search');
       return;
     }
     this.props.onSubmit({ search });

@@ -1,11 +1,11 @@
 import { Component } from 'react';
 
-import Searchbar from './Searchbar/Searchbar';
-import ImageGallery from './ImageGallery/ImageGallery';
-import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
-import Loader from './Loader/Loader';
-import Button from './Button/Button';
-import Modal from './Modal/Modal';
+import Searchbar from './Searchbar';
+import ImageGallery from './ImageGallery';
+import ImageGalleryItem from './ImageGalleryItem';
+import Loader from './Loader';
+import Button from './Button';
+import Modal from './Modal';
 import Api from '../servises/api';
 
 import css from './App.module.css';
