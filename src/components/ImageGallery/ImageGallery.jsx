@@ -1,3 +1,4 @@
+import css from './ImageGallery.module.css';
 export default function ImageGallery({ children }) {
-  return <ul className="gallery">{children}</ul>;
+  return <ul className={css.gallery}>{children}</ul>;
 }

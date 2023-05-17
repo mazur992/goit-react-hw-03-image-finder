@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import css from './ImageGalleryItem.module.css';
 
 export default class ImageGalleryItem extends Component {
   handleClick = event => {
@@ -16,13 +17,13 @@ export default class ImageGalleryItem extends Component {
         return (
           <li
             key={img.id}
-            className="gallery-item"
+            className={css.galleryItem}
             data-large={img.largeImageURL}
             data-tags={img.tags}
             onClick={this.handleClick}
           >
             <img
-              className="galleryItemImage"
+              className={css.galleryItemImage}
               src={img.webformatURL}
               alt={img.tags}
             />

@@ -7,6 +7,8 @@ import Loader from './Loader/Loader';
 import Button from './Button/Button';
 import Modal from './Modal/Modal';
 import Api from '../servises/api';
+
+import css from './App.module.css';
 export class App extends Component {
   state = {
     images: [],
@@ -56,7 +58,7 @@ export class App extends Component {
   componentWillUnmount() {}
   render() {
     return (
-      <div>
+      <div className={css.app}>
         <Searchbar
           onSubmit={this.onSubmit}
           isSubmiting={this.state.isLoading}

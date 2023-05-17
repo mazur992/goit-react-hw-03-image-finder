@@ -1,3 +1,4 @@
+import css from './Button.module.css';
 export default function Button({ props, incrementPage }) {
   const handleLoadMore = () => {
     incrementPage();
@@ -5,7 +6,7 @@ export default function Button({ props, incrementPage }) {
   const { images } = props;
   return (
     images.length !== 0 && (
-      <button type="button" onClick={handleLoadMore}>
+      <button className={css.button} type="button" onClick={handleLoadMore}>
         Load more
       </button>
     )

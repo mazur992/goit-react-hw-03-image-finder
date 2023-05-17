@@ -1,20 +1,23 @@
 import { MutatingDots } from 'react-loader-spinner';
+import css from './Loader.module.css';
 
 export default function Loader(props) {
   const { loading } = props;
   return (
     loading && (
+      // <div className={css.loader}>
       <MutatingDots
         height="150"
         width="150"
-        color="#4fa94d"
-        secondaryColor="#4fa94d"
+        color="#303f9f"
+        secondaryColor="#303f9f"
         radius="12.5"
         ariaLabel="mutating-dots-loading"
         wrapperStyle={{}}
-        wrapperClass=""
+        wrapperClass={css.loader}
         visible={true}
       />
+      // </div>
     )
   );
 }
