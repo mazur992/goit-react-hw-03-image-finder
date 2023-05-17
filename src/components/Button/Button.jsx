@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import css from './Button.module.css';
 export default function Button({ props, incrementPage }) {
   const handleLoadMore = () => {
@@ -12,3 +13,8 @@ export default function Button({ props, incrementPage }) {
     )
   );
 }
+
+Button.propTypes = {
+  props: PropTypes.object.isRequired,
+  incrementPage: PropTypes.func.isRequired,
+};

@@ -57,23 +57,21 @@ export class App extends Component {
   }
   componentWillUnmount() {}
   render() {
+    const { isLoading, images, isShowModal, largeImg } = this.state;
     return (
       <div className={css.app}>
-        <Searchbar
-          onSubmit={this.onSubmit}
-          isSubmiting={this.state.isLoading}
-        />
+        <Searchbar onSubmit={this.onSubmit} isSubmiting={isLoading} />
         <ImageGallery>
           <ImageGalleryItem
-            cards={this.state.images}
+            cards={images}
             showModal={this.showModal}
             addLargeI={this.addLargeImg}
           />
         </ImageGallery>
-        <Loader loading={this.state.isLoading} />
+        <Loader loading={isLoading} />
         <Button props={this.state} incrementPage={this.incrementPage} />
-        {this.state.isShowModal && (
-          <Modal largeImg={this.state.largeImg} hideModal={this.hideModal} />
+        {isShowModal && (
+          <Modal largeImg={largeImg} hideModal={this.hideModal} />
         )}
       </div>
     );

@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import css from './ImageGalleryItem.module.css';
 
 export default class ImageGalleryItem extends Component {
@@ -33,3 +34,9 @@ export default class ImageGalleryItem extends Component {
     });
   }
 }
+
+ImageGalleryItem.propTypes = {
+  cards: PropTypes.array.isRequired,
+  showModal: PropTypes.func.isRequired,
+  addLargeI: PropTypes.func.isRequired,
+};

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { MutatingDots } from 'react-loader-spinner';
 import css from './Loader.module.css';
 
@@ -19,3 +20,5 @@ export default function Loader(props) {
     )
   );
 }
+
+Loader.propTypes = { loading: PropTypes.bool.isRequired };

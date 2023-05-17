@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import * as basicLightbox from 'basiclightbox';
 import { Component } from 'react';
 
@@ -27,3 +28,7 @@ export default class Modal extends Component {
     return;
   }
 }
+Modal.propTypes = {
+  largeImg: PropTypes.object.isRequired,
+  hideModal: PropTypes.func.isRequired,
+};
