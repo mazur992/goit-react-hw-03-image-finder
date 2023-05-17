@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import * as basicLightbox from 'basiclightbox';
 import { Component } from 'react';
+let instance = '';
 
 export default class Modal extends Component {
-  componentDidMount() {
+  componentDidMount(prevProps, prevState) {
     window.addEventListener('keydown', this.clickEsc);
   }
   componentWillUnmount() {
@@ -12,11 +13,12 @@ export default class Modal extends Component {
   clickEsc = event => {
     if (event.code === 'Escape') {
       this.props.hideModal();
+      instance.close();
     }
   };
-  render() {
+  showModal = () => {
     const { largeImg } = this.props;
-    const instance = basicLightbox.create(
+    instance = basicLightbox.create(
       ` <div class="overlay">
       <div class="modal">
       <img src=${largeImg.img} alt=${largeImg.tags} />
@@ -24,6 +26,10 @@ export default class Modal extends Component {
     </div>`
     );
     instance.show();
+  };
+
+  render() {
+    this.showModal();
 
     return;
   }
@@ -31,4 +37,5 @@ export default class Modal extends Component {
 Modal.propTypes = {
   largeImg: PropTypes.object.isRequired,
   hideModal: PropTypes.func.isRequired,
+  isShowModal: PropTypes.bool.isRequired,
 };

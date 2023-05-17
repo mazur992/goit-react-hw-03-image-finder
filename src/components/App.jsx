@@ -71,7 +71,11 @@ export class App extends Component {
         <Loader loading={isLoading} />
         <Button props={this.state} incrementPage={this.incrementPage} />
         {isShowModal && (
-          <Modal largeImg={largeImg} hideModal={this.hideModal} />
+          <Modal
+            largeImg={largeImg}
+            isShowModal={this.state.isShowModal}
+            hideModal={this.hideModal}
+          />
         )}
       </div>
     );
