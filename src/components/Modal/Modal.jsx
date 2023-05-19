@@ -6,11 +6,9 @@ let instance = '';
 export default class Modal extends Component {
   componentDidMount(prevProps, prevState) {
     window.addEventListener('keydown', this.clickEsc);
-    window.addEventListener('click', this.clickBackdrop);
   }
   componentWillUnmount() {
     window.removeEventListener('keydown', this.clickEsc);
-    window.removeEventListener('click', this.clickBackdrop);
   }
   clickEsc = event => {
     if (event.code === 'Escape') {
@@ -19,7 +17,7 @@ export default class Modal extends Component {
     }
   };
   clickBackdrop = event => {
-    if (event.currentTarget !== event.target) {
+    if (event.currentTarget === event.target) {
       this.props.hideModal();
       instance.close();
     }
@@ -33,7 +31,10 @@ export default class Modal extends Component {
       </div>
     </div>`
     );
-    instance.show();
+    instance.show(() => {
+      const basicEl = document.querySelector('.basicLightbox');
+      basicEl.addEventListener('click', this.clickBackdrop);
+    });
   };
 
   render() {
