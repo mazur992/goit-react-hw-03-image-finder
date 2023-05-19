@@ -11,8 +11,6 @@ export default class Modal extends Component {
   componentWillUnmount() {
     window.removeEventListener('keydown', this.clickEsc);
     window.removeEventListener('click', this.clickBackdrop);
-
-    instance.close();
   }
   clickEsc = event => {
     if (event.code === 'Escape') {
