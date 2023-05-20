@@ -77,7 +77,7 @@ export class App extends Component {
           />
         </ImageGallery>
         <Loader loading={isLoading} />
-        {this.state.error || (
+        {this.state.error && (
           <Button props={this.state} incrementPage={this.incrementPage} />
         )}
         {isShowModal && (
