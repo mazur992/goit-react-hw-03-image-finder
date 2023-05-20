@@ -13,13 +13,17 @@ export default class Modal extends Component {
   clickEsc = event => {
     if (event.code === 'Escape') {
       this.props.hideModal();
-      instance.close();
+      instance.close(() => {
+        document.removeEventListener('click', this.clickBackdrop);
+      });
     }
   };
   clickBackdrop = event => {
     if (event.currentTarget === event.target) {
       this.props.hideModal();
-      instance.close();
+      instance.close(() => {
+        document.removeEventListener('click', this.clickBackdrop);
+      });
     }
   };
   showModal = () => {

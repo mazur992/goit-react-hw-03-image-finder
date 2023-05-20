@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Notiflix from 'notiflix';
 
 import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
@@ -15,6 +16,7 @@ export class App extends Component {
     search: '',
     page: 1,
     isLoading: false,
+    error: true,
 
     largeImg: { img: '', alt: '' },
     isShowModal: false,
@@ -44,12 +46,18 @@ export class App extends Component {
       this.setState({ isLoading: true });
       const { search } = this.state.search;
       try {
+        this.setState({ error: true });
         const api = await Api(search, this.state.page);
+        if (api.length === 0) {
+          this.setState({ error: false });
+          Notiflix.Notify.failure('Nothing was found for your request');
+          return;
+        }
         this.setState(prevState => ({
           images: [...prevState.images, { images: api }],
         }));
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.log(err);
       } finally {
         this.setState({ isLoading: false });
       }
@@ -69,7 +77,9 @@ export class App extends Component {
           />
         </ImageGallery>
         <Loader loading={isLoading} />
-        <Button props={this.state} incrementPage={this.incrementPage} />
+        {this.state.error || (
+          <Button props={this.state} incrementPage={this.incrementPage} />
+        )}
         {isShowModal && (
           <Modal
             largeImg={largeImg}
